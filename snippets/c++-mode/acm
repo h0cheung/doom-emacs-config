@@ -1,0 +1,159 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+using ull = unsigned long long;
+// using lll = __int128;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+using vll = vector<ll>;
+
+#define RST(a) memset(a, 0, sizeof(a))
+#define RSTV(a, value) memset(a, value, sizeof(a))
+#define FOR(i, begin, end) for (auto i = (begin); i != (end); ++i)
+#define ALL(a) a.begin(), a.end()
+#define SZ(a) a.size();
+$1
+
+// #pragma comment(linker, "/stack:200000000")
+// #pragma GCC optimize(3)
+// #pragma GCC optimize(2)
+// #pragma GCC
+// target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native") ~ #pragma
+// GCC optimize("unroll-loops")
+const int INF = 0x3f3f3f3f;
+const double PI = acos(-1.0);
+
+#ifdef PBDS
+
+#ifndef EXTCXX_H
+#define EXTCXX_H
+#include <bits/extc++.h>
+#endif
+
+using namespace __gnu_pbds;
+
+#define Tree_set(key)                          \
+  tree<key, null_type, less<key>, rb_tree_tag, \
+       tree_order_statistics_node_update>
+#define Tree_set_max(key)                         \
+  tree<key, null_type, greater<key>, rb_tree_tag, \
+       tree_order_statistics_node_update>
+#define Tree_map(key, mapped)               \
+  tree<key, mapped, less<key>, rb_tree_tag, \
+       tree_order_statistics_node_update>  // insert()
+#define Tree_map_max(key, mapped)              \
+  tree<key, mapped, greater<key>, rb_tree_tag, \
+       tree_order_statistics_node_update>
+#define hash_map(a, b) gp_hash_table<a, b>
+#define Ppq(value, cmp)                  \
+  __gnu_pbds::priority_queue<value, cmp, \
+                             pairing_heap_tag>  // cmp = less<key>: Max-heap
+// thin_heap_tag
+// begin() to end()
+// join modify erase
+#endif
+
+#ifdef GNUCXX  // rope
+#ifndef EXTCXX_H
+#define EXTCXX_H
+#include <bits/extc++.h>
+#endif
+using namespace __gnu_cxx;
+#endif
+
+template <class T>
+inline int chmin(T& a, const T& b) {
+  if (b < a) {
+    a = b;
+    return 1;
+  }
+  return 0;
+}
+template <class T>
+inline int chmax(T& a, const T& b) {
+  if (b > a) {
+    a = b;
+    return 1;
+  }
+  return 0;
+}
+
+#ifdef EXOI  // no scanf !!!
+const int IOSIZE = (1 << 21);
+char fr[IOSIZE], *pr1 = fr, *pr2 = fr;
+char fw[IOSIZE];
+#define getchar()                                                             \
+  (pr1 == pr2 && (pr2 = (pr1 = fr) + fread(fr, 1, IOSIZE, stdin), pr1 == pr2) \
+       ? EOF                                                                  \
+       : *pr1++)
+#endif
+template <class T = int>
+inline T in() {
+  T x = 0;
+  bool flag = 1;
+  char ch = getchar();
+  while (!isdigit(ch)) {
+    if (ch == '-') flag = 0;
+    ch = getchar();
+  }
+  while (isdigit(ch)) {
+    x *= 10;
+    x += (ch - '0');
+    ch = getchar();
+  }
+  if (flag) return x;
+  return ~(x - 1);
+}
+template <class T>
+inline void in(T& x) {
+  x = 0;
+  bool flag = 1;
+  char ch = getchar();
+  while (!isdigit(ch)) {
+    if (ch == '-') flag = 0;
+    ch = getchar();
+  }
+  while (isdigit(ch)) {
+    x *= 10;
+    x += (ch - '0');
+    ch = getchar();
+  }
+  if (!flag) x = ~(x - 1);
+}
+
+template <class T>
+inline void out(T x) {
+  if (x < 0) {
+    putchar('-');
+    x = ~(x - 1);
+  }
+  char s[40], top = 0;
+  while (x) {
+    s[++top] = x % 10;
+    x /= 10;
+  }
+  if (!top) s[++top] = 0;
+  while (top) putchar(s[top--] + '0');
+}
+
+void solve() {
+  $0
+}
+
+int main() {
+  int T = 1;
+#ifdef IOS
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+#ifdef MULTI
+  cin >> T;
+#endif
+#else
+#ifdef MULTI
+  T = in<int>();
+#endif
+#endif
+  while (T--) solve();
+}
