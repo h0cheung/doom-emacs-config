@@ -5,25 +5,43 @@ See [[https://github.com/hlissner/doom-emacs]] for information about Doom Emacs.
 This file is an introduction for my config.
 
 ** Optimized features
+
     * evil as base keymap
+
     * eshell (in progress)
+
     * telega
+
     * C/C++, Python
+
     * build and run single file (mainly for competitive programming)
+
     * systemd
+
     * pkgbuild for Arch Linux
+
     * rime
+
     * ui tweaks and small tools
 
 ** Recommanded enviromment
+
     * Arch Linux
+
       other Linux, BSD etc. are welcome. *Do not report issues about Windows*.
+
     * Emacs 26.1+
+
       tested on Emacs 28 and 27.1
 
 ** Additional dependencies (check dependencies of Doom Emacs first)
+
     * fonts
+
       Sarasa Gothic, Noto Color Emoji (change it in ~:h-cheung ui~)
+
     * libtd for telega
-      use 32f2338bd199dd06a1b4b5f1ad14f2d4f2868f01 before telega updates
-    * librime and rime config in ~~/.local/share/emacs-rime~
+
+      use ~32f2338bd199dd06a1b4b5f1ad14f2d4f2868f01~ before telega updates
+
+    * librime and rime config in ~$HOME/.local/share/emacs-rime~
