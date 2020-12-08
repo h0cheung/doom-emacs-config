@@ -204,8 +204,8 @@
         +auto-method)      ; auto toggle input method
        tools
        ui
-       cc-extra
-       python-extra
+       (:if (featurep! :lang cc) cc-extra)
+       (:if (featurep! :lang python) python-extra)
        systemd
        pkgbuild
-       eshell-extra)
+       (:if (featurep! :term eshell) eshell-extra))
