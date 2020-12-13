@@ -21,6 +21,10 @@
   :init (setq ace-pinyin-use-avy t)
   :config (ace-pinyin-global-mode t))
 
+; disable gtk im modules for emacs-pgtk, add "Emacs*UseXIM: false" to ~/.Xresources to disable xim
+(when (boundp 'pgtk-use-im-context-on-new-connection)
+  (setq pgtk-use-im-context-on-new-connection nil))
+
 ;;
 ;;; Hack
 ;;;
