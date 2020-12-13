@@ -10,12 +10,6 @@
 
 (bind-key* "C-\\" #'toggle-input-method)
 
-(use-package! fcitx
-  :after evil
-  :config
-  (when (executable-find "fcitx-remote")
-    (fcitx-evil-turn-on)))
-
 (use-package! ace-pinyin
   :after avy
   :init (setq ace-pinyin-use-avy t)
