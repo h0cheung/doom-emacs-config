@@ -14,7 +14,7 @@ This file is an introduction for my config.
 
     * C/C++, Python
 
-    * build and run single file (mainly for competitive programming)
+    * build and run single files (mainly for competitive programming)
 
     * systemd
 
@@ -28,11 +28,11 @@ This file is an introduction for my config.
 
     * Arch Linux
 
-      other Linux, BSD etc. are welcome. *Do not report issues about Windows*.
+      Other Linux, BSD etc. are welcome. *Do not report issues about Windows*.
 
-    * Emacs 26.1+
+    * emacs-pgtk-native-comp-git
 
-      tested on Emacs 28 and 27.1
+      Also tested on 28 (master branch) and 27.1. Doom Emacs supports 26.1+.
 
 ** Additional dependencies (check dependencies of Doom Emacs first)
 
