@@ -85,7 +85,7 @@
        eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       ;vterm             ; the best terminal emulation in Emacs
+       ;;vterm             ; the best terminal emulation in Emacs
 
        :checkers
        (syntax +childframe)             ; tasing you for every semicolon you forget
@@ -159,7 +159,7 @@
         +hugo
         +journal
         +pretty
-        ;+jupyter
+        ;;+jupyter
         +pandoc          ; pandoc integration into org's exporter
         +pomodoro
         +present)         ;;php               ; perl's insecure younger brother
@@ -208,4 +208,5 @@
        (:if (featurep! :lang python) python-extra)
        systemd
        pkgbuild
-       (:if (featurep! :term eshell) eshell-extra))
+       (:if (featurep! :term eshell) eshell-extra)
+       fish)
