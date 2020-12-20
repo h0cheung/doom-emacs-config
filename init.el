@@ -209,4 +209,5 @@
        systemd
        pkgbuild
        (:if (featurep! :term eshell) eshell-extra)
-       fish)
+       fish
+       (:if (featurep! :editor evil) evil-hybird))
