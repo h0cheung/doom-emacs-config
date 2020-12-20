@@ -42,3 +42,6 @@
 
 (after! ccls
   (ccls-use-default-rainbow-sem-highlight))
+
+(after! lsp-clangd
+  (set-lsp-priority! 'clangd 1))
