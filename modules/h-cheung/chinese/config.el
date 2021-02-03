@@ -22,16 +22,14 @@
 ;;
 ;;; Hack
 ;;;
-(defadvice! +chinese--org-html-paragraph-a (args)
-  "Join consecutive Chinese lines into a single long line without)
+(define-advice org-html-paragraph (:filter-args (args) chinese-a)
+  "Join consecutive Chinese lines into a single long line without
 unwanted space when exporting org-mode to html."
-  :filter-args #'org-html-paragraph
   (++chinese--org-paragraph args))
 
-(defadvice! +chinese--org-hugo-paragraph-a (args)
+(define-advice org-hugo-paragraph (:filter-args (args) chinese-a)
   "Join consecutive Chinese lines into a single long line without
 unwanted space when exporting org-mode to hugo markdown."
-  :filter-args #'org-hugo-paragraph
   (++chinese--org-paragraph args))
 
 (defun ++chinese--org-paragraph (args)
@@ -58,21 +56,17 @@ unwanted space when exporting org-mode to hugo markdown."
   :bind
   ("C-S-s-j" . #'+rime-convert-string-at-point)
   (:map rime-active-mode-map
-    ("C-S-s-j" . #'rime-inline-ascii)
-    ("C-M-S-s-j" . #'rime-inline-ascii))
+   ("C-S-s-j" . #'rime-inline-ascii)
+   ("C-M-S-s-j" . #'rime-inline-ascii))
   (:map rime-mode-map
-    ("C-M-S-s-j" . #'rime-force-enable)
-    ("C-." . #'rime-send-keybinding)
-    ("S-SPC" . #'rime-send-keybinding)
-    ("C-`" . #'rime-send-keybinding)
-    ("C-~" . #'rime-send-keybinding)
-    ("C-S-`" . #'rime-send-keybinding))
+   ("C-M-S-s-j" . #'rime-force-enable)
+   ("C-." . #'rime-send-keybinding)
+   ("S-SPC" . #'rime-send-keybinding)
+   ("C-`" . #'rime-send-keybinding)
+   ("C-~" . #'rime-send-keybinding)
+   ("C-S-`" . #'rime-send-keybinding))
   :custom
   (default-input-method "rime")
-  ;; (rime-librime-root (cond (IS-MAC (let ((dir (expand-file-name "~/repos/librime/dist")))
-  ;;                                    (when (file-directory-p dir)
-  ;;                                      dir)))
-  ;;                          (t rime-librime-root)))
   (rime-share-data-dir
    (cl-some (lambda (dir)
               (let ((abs-dir (expand-file-name dir)))
@@ -147,17 +141,17 @@ input scheme to convert to Chinese."
 
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available."))
-  (defadvice! +rime--posframe-display-content-a (args)
+  (define-advice rime--posframe-display-content (:filter-args (args) resolve-posframe-issue-a)
     "给 `rime--posframe-display-content' 传入的字符串加一个全角空
 格，以解决 `posframe' 偶尔吃字的问题。"
-    :filter-args #'rime--posframe-display-content
     (cl-destructuring-bind (content) args
       (let ((newresult (if (string-blank-p content)
                            content
                          (concat content "　"))))
         (list newresult))))
+
   (when (featurep! +rime-predicates)
-      (load! "+rime-predicates")))
+    (load! "+rime-predicates")))
 
 
 ;; Support pinyin in Ivy
