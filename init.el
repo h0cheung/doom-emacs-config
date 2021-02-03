@@ -4,7 +4,6 @@
 (setq max-lisp-eval-depth 100000)
 ;; Limit on number of Lisp variable bindings and unwind-protects.
 (setq max-specpdl-size 100000)
-(setq comp-speed 2)
 
 ;; This file controls what Doom modules are enabled and what order they load
 ;; in. Remember to run 'doom sync' after modifying it!
@@ -157,9 +156,9 @@
         +dragndrop       ; file drag & drop support
         +gnuplot
         +hugo
-        ;;+journal
+        +journal
         +pretty
-        ;;+jupyter
+        +jupyter
         +pandoc          ; pandoc integration into org's exporter
         +pomodoro
         +present)         ;;php               ; perl's insecure younger brother

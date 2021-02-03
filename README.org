@@ -30,7 +30,7 @@ This file is an introduction for my config.
 
       Other Linux, BSD etc. are welcome. *Do not report issues about Windows*.
 
-    * emacs-pgtk-native-comp-git
+    * emacs-pgtk (use ~feature/pgtk~ branch and build with ~--with-pgtk~ argument)
 
       Also tested on 28 (master branch) and 27.1. Doom Emacs supports 26.1+.
 
