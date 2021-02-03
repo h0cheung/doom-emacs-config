@@ -157,7 +157,7 @@
         +dragndrop       ; file drag & drop support
         +gnuplot
         +hugo
-        +journal
+        ;;+journal
         +pretty
         ;;+jupyter
         +pandoc          ; pandoc integration into org's exporter
@@ -201,7 +201,7 @@
        :h-cheung
        chinese
        (telega             ; telegram
-        +auto-method)      ; auto toggle input method
+        +auto-im)      ; auto toggle input method
        tools
        ui
        (:if (featurep! :lang cc) cc-extra)

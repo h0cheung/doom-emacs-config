@@ -4,30 +4,37 @@
 
 ;; telegram client for emacs
 (use-package! telega
-  :commands (telega)
   :defer t
-  :bind ("C-M-S-s-t" . #'telega)
   :custom
   ;; (telega-proxies (list '(:server "127.0.0.1" :port 1086 :enable t
   ;;                         :type (:@type "proxyTypeSocks5"))))
-  (telega-chat-reply-prompt "<<< ")
-  (telega-chat-edit-prompt "+++ ")
+  (telega-open-file-function 'org-open-file)
+  (telega-chat-input-prompt '((prompt . ">>> ")
+                              (reply . "<<< ")
+                              (edit . "+++ ")))
+  (telega-chat-input-anonymous-prompt '((prompt . "Anonymous>>> ")
+                                        (reply . "Anonymous<<< ")
+                                        (edit . "Anonymous+++ ")))
+  (telega-chat-input-comment-prompt '((prompt . "Comment>>> ")
+                                      (reply . "Comment<<< ")
+                                      (edit . "Comment+++ ")))
   (telega-sticker-size '(8 . 48))
-  (telega-chat-use-markdown-version nil)
   (telega-animation-play-inline t)
   (telega-emoji-use-images nil)
   (telega-sticker-set-download t)
- ;; (telega-use-tracking-for '(or pin (label "⌘")))
   (telega-chat-show-deleted-messages-for '(all))
+
   :init
   (setq telega-use-images (or (display-graphic-p) (daemonp)))
-
+  (define-key global-map (kbd "C-c t") telega-prefix-map)
+  (which-key-add-keymap-based-replacements global-map
+    (kbd "C-c t") '("telega"))
   (when (featurep! :completion ivy)
     (load! "+ivy-telega"))
 
   :hook
   (telega-chat-mode . yas-minor-mode-on)
-  (telega-chat-mode . visual-line-mode)
+  ;; (telega-chat-mode . visual-line-mode)
   (telega-chat-mode . (lambda ()
                         (set-company-backend! 'telega-chat-mode
                           (append '(telega-company-emoji
@@ -35,41 +42,46 @@
                                     telega-company-hashtag)
                                   (when (telega-chat-bot-p telega-chatbuf--chat)
                                     '(telega-company-botcmd))))))
-  (telega-chat-pre-message . telega-msg-ignore-blocked-sender)
+                                        ;(telega-chat-pre-message . telega-msg-ignore-blocked-sender)
+  (telega-load . telega-mode-line-mode)
+  (telega-load . global-telega-url-shorten-mode)
+  (telega-load . global-telega-mnz-mode)
+
   :config
+  (setq telega-mode-line-string-format
+        (cl-remove '(:eval (telega-mode-line-icon))
+                   telega-mode-line-string-format
+                   :test #'equal))
+  (add-hook 'telega-msg-ignore-predicates 'telega-msg-from-blocked-sender-p)
 
-  (when (featurep! +auto-method)
-    (load! "+telega-auto-method"))
+  (when (featurep! +auto-im)
+    (load! "+telega-auto-im"))
 
-  ; (set-evil-initial-state! '(telega-root-mode telega-chat-mode) 'emacs)
+                                        ; (set-evil-initial-state! '(telega-root-mode telega-chat-mode) 'emacs)
   (when (featurep! :editor evil)
     (map!
      (:map telega-msg-button-map
-       "J" #'telega-button-forward
-       "k" nil
-       "K" #'telega-button-backward
-       "p" #'telega-msg-redisplay
-       "l" nil))
+      "J" #'telega-button-forward
+      "k" nil
+      "K" #'telega-button-backward
+      "p" #'telega-msg-redisplay
+      "l" nil))
     (map!
      :map telega-chat-button-map
-      "h" nil))
+     "h" nil))
 
   ;; use RET to add newline and C-RET to send
   (when (featurep! :config default)
     (map! :map telega-chat-mode-map
-      "RET"              #'+default/newline-below
-      "<C-return>"       #'telega-chatbuf-input-send))
-
-  (pushnew! telega-known-inline-bots
-            "@vid" "@bing" "@wiki" "@imdb")
+          "C-c C-t"          #'telega-chatbuf-attach-sticker
+          "RET"              nil
+          "<C-return>"       #'telega-chatbuf-input-send))
 
   (set-popup-rule! (regexp-quote telega-root-buffer-name)
     :ignore t)
   ;; (set-popup-rule! "^◀[^◀\[]*[\[({<].+[\])}>]"
   ;;   :side 'right :size 100 :select t :ttl 300 :quit nil :modeline t)
 
-  (telega-mode-line-mode 1)
-  (telega-url-shorten-mode 1)
   (when (and IS-LINUX (boundp 'dbus-runtime-version))
     (telega-notifications-mode 1))
 
@@ -84,7 +96,9 @@
                                     :heigt 1.0
                                     :v-adjust -0.2
                                     :face all-the-icons-blue)))
+  (use-package! telega-stories
+    :config
+    (telega-stories-mode 1)
+    (map! :map telega-root-mode-map "v e" 'telega-view-emacs-stories))
+
   (load! "+telega-addition"))
-  ;; (advice-add 'telega-root--killed :around (lambda ())))
-  ;; (when (daemonp)
-  ;;   (telega nil)))
