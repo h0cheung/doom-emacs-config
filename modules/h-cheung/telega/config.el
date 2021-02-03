@@ -23,6 +23,7 @@
   (telega-emoji-use-images nil)
   (telega-sticker-set-download t)
   (telega-chat-show-deleted-messages-for '(all))
+  (telega-symbol-folder "📁")
 
   :init
   (setq telega-use-images (or (display-graphic-p) (daemonp)))
