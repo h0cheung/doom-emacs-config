@@ -11,7 +11,7 @@
 
 ;; emoji 字体 Noto Color Emoji
 (defun +font-set-emoji (&rest _)
-  (set-fontset-font t 'symbol "Noto Color Emoji"))
+  (set-fontset-font t 'symbol "Noto Color Emoji" nil 'prepend))
 
 (+font-set-emoji)
 (add-hook! 'after-make-frame-functions #'+font-set-emoji)
