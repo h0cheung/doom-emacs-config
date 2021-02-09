@@ -5,4 +5,4 @@
   :recipe (:host github :repo "google/styleguide"
            :files ("google-c-style.el")
            :branch "gh-pages"))
-(package! ccls :disable t)
+;; (package! ccls :disable t)
