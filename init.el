@@ -164,7 +164,7 @@
         +present)         ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp)            ; beautiful is better than ugly
+       (python +lsp +pyright)            ; beautiful is better than ugly
        qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
@@ -204,7 +204,7 @@
        tools
        ui
        (:if (featurep! :lang cc) cc-extra)
-       (:if (featurep! :lang python) python-extra)
+       ;;(:if (featurep! :lang python) python-extra)
        systemd
        pkgbuild
        (:if (featurep! :term eshell) eshell-extra)
