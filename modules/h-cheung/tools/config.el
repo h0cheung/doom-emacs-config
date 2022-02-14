@@ -87,11 +87,3 @@
                    (region-beginning) (region-end))))
       (delete-region (region-beginning) (region-end))
       (insert (utf7-decode string t)))))
-
-(use-package! evil-pinyin
-  :when
-  (featurep! :editor evil)
-  :custom
-  (evil-pinyin-scheme 'simplified-traditional-quanpin-all)
-  :config
-  (global-evil-pinyin-mode))

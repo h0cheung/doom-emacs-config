@@ -5,3 +5,4 @@
 (package! rime)
 (package! ace-pinyin)
 (package! pinyinlib)
+(package! evil-pinyin)

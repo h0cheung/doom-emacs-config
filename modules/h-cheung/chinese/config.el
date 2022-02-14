@@ -160,3 +160,11 @@ input scheme to convert to Chinese."
     (setf (car str) (pinyinlib-build-regexp-string (car str)))
     str)
   (advice-add 'orderless-regexp :filter-args #'orderless-regexp-pinyin))
+
+(use-package! evil-pinyin
+  :when
+  (featurep! :editor evil)
+  :custom
+  (evil-pinyin-scheme 'simplified-traditional-quanpin-all)
+  :config
+  (global-evil-pinyin-mode))
