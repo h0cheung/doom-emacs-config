@@ -153,3 +153,10 @@ input scheme to convert to Chinese."
   (when (featurep! +rime-predicates)
     (load! "+rime-predicates")))
 
+(use-package! pinyinlib
+  :commands (pinyinlib-build-regexp-string)
+  :init
+  (defun orderless-regexp-pinyin (str)
+    (setf (car str) (pinyinlib-build-regexp-string (car str)))
+    str)
+  (advice-add 'orderless-regexp :filter-args #'orderless-regexp-pinyin))
