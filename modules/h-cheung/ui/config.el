@@ -4,10 +4,10 @@
 
 ;; 字体
 (setq
- doom-font (font-spec :family "Sarasa Mono SC" :size 18 :weight 'Regular)
- doom-unicode-font (font-spec :family "Sarasa Mono SC" :size 18 :weight 'Regular)
- doom-variable-pitch-font (font-spec :family "Sarasa Mono SC" :size 18 :weight 'Regular)
- doom-big-font (font-spec :family "Sarasa Mono SC" :size 24 :weight 'Regular))
+ doom-font (font-spec :family "Sarasa Mono SC" :size 20 :weight 'Regular)
+ doom-unicode-font (font-spec :family "Sarasa Mono SC" :size 20 :weight 'Regular)
+ doom-variable-pitch-font (font-spec :family "Sarasa Mono SC" :size 20 :weight 'Regular)
+ doom-big-font (font-spec :family "Sarasa Mono SC" :size 26 :weight 'Regular))
 
 ;; emoji 字体 Noto Color Emoji
 (defun +font-set-emoji (&rest _)
