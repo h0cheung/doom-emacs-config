@@ -11,10 +11,9 @@
 
 ;; emoji 字体 Noto Color Emoji
 (defun +font-set-emoji (&rest _)
-  (set-fontset-font t 'symbol "Noto Color Emoji" nil 'prepend))
+  (set-fontset-font t 'emoji "Noto Color Emoji" nil 'prepend))
 
-(+font-set-emoji)
-(add-hook! 'after-make-frame-functions #'+font-set-emoji)
+(add-hook! 'after-setting-font-hook #'+font-set-emoji)
 
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
