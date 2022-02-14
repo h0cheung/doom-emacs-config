@@ -31,8 +31,9 @@
                         (file-name-sans-extension
                          (file-name-nondirectory buffer-file-name))))
             (file-path (shell-quote-argument buffer-file-name))
-            (dir (if (doom-project-root) (doom-project-root)
-                   (file-name-directory buffer-file-name))))
+            (dir (shell-quote-argument
+                  (if (doom-project-root) (doom-project-root)
+                    (file-name-directory buffer-file-name)))))
         (pcase major-mode
           ('c-mode (run-in-eshell (concat "cd " dir " && "
                                           "gcc -O2 -std=c11 "
