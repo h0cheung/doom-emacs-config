@@ -30,8 +30,6 @@
   (define-key global-map (kbd "C-c t") telega-prefix-map)
   (which-key-add-keymap-based-replacements global-map
     (kbd "C-c t") '("telega"))
-  (when (featurep! :completion ivy)
-    (load! "+ivy-telega"))
 
   :hook
   (telega-chat-mode . yas-minor-mode-on)
