@@ -4,18 +4,14 @@
 
 ;; 判断网络是否连通
 (defun internet-up-p (&optional host)
-    (= 0 (call-process "curl" nil nil nil
-                       (if host host "https://cp.cloudflare.com/generate_204"))))
+  (= 0 (call-process "curl" nil nil nil
+                     (if host host "https://cp.cloudflare.com/generate_204"))))
 
 ;; gpg 可以读取在 emacs 中输入的密码
 (use-package! pinentry :config (pinentry-start))
 
 ;; 让flycheck检查载入el文件时从load-path里搜索
 (setq flycheck-emacs-lisp-load-path 'inherit)
-
-;; ispell: fix "zh_CN" dict error
-(after! ispell
-  (ispell-change-dictionary "american" t))
 
 ;; docker management
 (after! docker
@@ -41,9 +37,9 @@
 (add-hook 'find-file-hook #'recentf-save-list)
 
 ;; cleanup trailing whitespaces before save buffers.
-(add-hook! before-save
-           #'delete-trailing-whitespace
-           #'whitespace-cleanup)
+;; (add-hook! before-save
+;;            #'delete-trailing-whitespace
+;;            #'whitespace-cleanup)
 
 ;; neopastebin -- emacs pastebin interface
 (use-package! neopastebin

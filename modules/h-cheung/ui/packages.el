@@ -7,3 +7,4 @@
 (package! srcery-theme)
 (package! flucui-themes)
 (package! lab-themes)
+(when IS-LINUX (package! dbus))

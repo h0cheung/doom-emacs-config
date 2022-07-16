@@ -20,7 +20,57 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
+(defvar doom-theme-light 'doom-one-light)
+(defvar doom-theme-dark 'doom-one)
+(setq doom-theme doom-theme-light)
+
+(defun doom--set-theme (theme)
+  (interactive "sTheme name: ")
+  (disable-theme doom-theme)
+  (setq doom-theme theme)
+  (load-theme doom-theme t))
+
+(when IS-LINUX
+  (defun theme--switch (scheme)
+    (pcase scheme
+      (0
+       (doom--set-theme doom-theme-light))
+      (1
+       (doom--set-theme doom-theme-dark))
+      (_
+       (message "Invalid key value"))))
+
+  (defun theme--handle-value (value)
+    (theme--switch (car (car value))))
+
+  (defun theme--handle-dbus-event (namespace key value)
+    "Handler for FreeDesktop theme changes."
+    (when (and
+           (string= namespace "org.freedesktop.appearance")
+           (string= key "color-scheme"))
+      (theme--switch (car value))))
+
+  (require 'dbus)
+
+  ;; since this is all FreeDesktop stuff, this *might* work on GNOME without changes
+  (dbus-call-method-asynchronously
+   :session
+   "org.freedesktop.portal.Desktop"
+   "/org/freedesktop/portal/desktop"
+   "org.freedesktop.portal.Settings"
+   "Read"
+   #'theme--handle-value
+   "org.freedesktop.appearance"
+   "color-scheme")
+
+
+  (dbus-register-signal
+   :session
+   "org.freedesktop.portal.Desktop"
+   "/org/freedesktop/portal/desktop"
+   "org.freedesktop.portal.Settings"
+   "SettingChanged"
+   #'theme--handle-dbus-event))
 
 ;; 设定popup的窗口形式为右侧开启，宽度为40%
 ;; (set-popup-rule! "^\\*" :side 'right :size 0.5 :select t)
@@ -54,12 +104,8 @@
         lsp-ui-sideline-update-mode 'point
         lsp-enable-file-watchers nil
         lsp-ui-doc-enable t))
-  ;; (if (featurep 'xwidget-internal)
-  ;;     (setq lsp-ui-doc-use-webkit t)))
-
-;; 拆分窗口时默认把焦点定在新窗口，doom为了和vim保持一致，竟然把这点改回去了
-(setq evil-split-window-below t
-      evil-vsplit-window-right t)
+;; (if (featurep 'xwidget-internal)
+;;     (setq lsp-ui-doc-use-webkit t)))
 
 ;; 显示时间
 (display-time-mode 1)

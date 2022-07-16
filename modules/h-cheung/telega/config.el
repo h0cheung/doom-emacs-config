@@ -8,7 +8,7 @@
   :custom
   ;; (telega-proxies (list '(:server "127.0.0.1" :port 1086 :enable t
   ;;                         :type (:@type "proxyTypeSocks5"))))
-  (telega-open-file-function 'org-open-file)
+  ;; (telega-open-file-function 'org-open-file)
   (telega-chat-input-prompt '((prompt . ">>> ")
                               (reply . "<<< ")
                               (edit . "+++ ")))
@@ -18,18 +18,16 @@
   (telega-chat-input-comment-prompt '((prompt . "Comment>>> ")
                                       (reply . "Comment<<< ")
                                       (edit . "Comment+++ ")))
-  (telega-sticker-size '(8 . 48))
+  ;; (telega-sticker-size '(8 . 48))
   (telega-animation-play-inline t)
   (telega-emoji-use-images nil)
   (telega-sticker-set-download t)
   (telega-chat-show-deleted-messages-for '(all))
   (telega-symbol-folder "📁")
+  (telega-emoji-company-backend 'telega-company-telegram-emoji)
 
   :init
   (setq telega-use-images (or (display-graphic-p) (daemonp)))
-  (define-key global-map (kbd "C-c t") telega-prefix-map)
-  (which-key-add-keymap-based-replacements global-map
-    (kbd "C-c t") '("telega"))
 
   :hook
   (telega-chat-mode . yas-minor-mode-on)
@@ -41,10 +39,10 @@
                                     telega-company-hashtag)
                                   (when (telega-chat-bot-p telega-chatbuf--chat)
                                     '(telega-company-botcmd))))))
-                                        ;(telega-chat-pre-message . telega-msg-ignore-blocked-sender)
   (telega-load . telega-mode-line-mode)
   (telega-load . global-telega-url-shorten-mode)
   (telega-load . global-telega-mnz-mode)
+  (telega-load . telega-autoplay-mode)
 
   :config
   (setq telega-mode-line-string-format
@@ -75,6 +73,9 @@
           "C-c C-t"          #'telega-chatbuf-attach-sticker
           "RET"              nil
           "<C-return>"       #'telega-chatbuf-input-send))
+
+  (map! :map global-map
+        :desc "telega" "C-c t" telega-prefix-map)
 
   (set-popup-rule! (regexp-quote telega-root-buffer-name)
     :ignore t)

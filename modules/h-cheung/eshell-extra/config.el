@@ -1,7 +1,7 @@
 ;;; h-cheung/eshell-extra/config.el -*- lexical-binding: t; -*-
 (map!
  (:leader
-  (:prefix ("e" . "run-in-eshell")
+  (:prefix ("E" . "run-in-eshell")
    :desc "Run custom command"
    "c" #'run-in-eshell
    :desc "Run single code file"
