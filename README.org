@@ -6,33 +6,39 @@ This file is an introduction for my config.
 
 ** Optimized features
 
-    * evil as base keymap
+    * fastest LSP (lsp-bridge)
 
-    * eshell (in progress)
+    * C/C++, Python, Go
 
-    * telega
+    * GitHub Copilot
 
-    * C/C++, Python
+    * systemd units, rpm spec, Arch Linux pkgbuild
 
-    * build and run single files (mainly for competitive programming)
+    * build and run single files (mainly for competitive programming) in eshell
 
-    * systemd
-
-    * pkgbuild for Arch Linux
-
-    * rime
+    * rime for butter Chinese input
 
     * ui tweaks and small tools
 
+    * Emacs Application Framework (EAF)
+
+    * Netease Cloud Music
+
+    * matrix chat
+
 ** Recommanded enviromment
 
-    * Arch Linux
+*** Fedora Linux
 
-      Other Linux, BSD etc. are welcome. *Do not report issues about Windows*.
+Tested with emacs 29 (master branch).
 
-    * emacs-pgtk (use ~feature/pgtk~ branch and build with ~--with-pgtk~ argument)
+Use pgtk (build with ~--with-pgtk~ argument) for better wayland support.
 
-      Also tested on 28 (master branch) and 27.1. Doom Emacs supports 26.1+.
+My copr repo for emacs: [[https://copr.fedorainfracloud.org/coprs/h-cheung/emacs]]
+
+Doom Emacs supports 27.1+ now. 29+ is not supported but in fact works well.
+
+*** Mac OS
 
 ** Additional dependencies (check dependencies of Doom Emacs first)
 
@@ -40,8 +46,4 @@ This file is an introduction for my config.
 
       Sarasa Gothic, Noto Color Emoji (change it in ~:h-cheung ui~)
 
-    * libtd for telega
-
-      use ~32f2338bd199dd06a1b4b5f1ad14f2d4f2868f01~ before telega updates
-
-    * librime and rime config in ~$HOME/.local/share/emacs-rime~
+    * ~librime~, ~emacs-devel~ and rime config in ~$HOME/.local/share/emacs-rime~.
